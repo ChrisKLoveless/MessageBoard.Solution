@@ -13,9 +13,9 @@ public class UsersController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
-        List<Users> users = Users.GetUsers();
+        List<Users> users = await Users.GetUsersAsync();
         return View(users);
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using RestSharp;
 
 namespace MessageBoard.Models
 {
@@ -14,10 +15,13 @@ namespace MessageBoard.Models
         public int UsersId { get; set; }
 
 
-        public static List<Users> GetUsers()
+        public static async Task<List<Users>> GetUsersAsync()
         {
-            var apiCallTask = ApiHelper.GetAll();
-            var result = apiCallTask.Result;
+            RestClient client = new RestClient("http://localhost:5000/");
+            RestRequest request = new RestRequest($"api/users", Method.Get);
+            RestResponse response = await client.GetAsync(request);
+            var result = response.Content;
+            // var result = apiCallTask.Result;
 
             JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
             List<Users> usersList = JsonConvert.DeserializeObject<List<Users>>(jsonResponse.ToString());

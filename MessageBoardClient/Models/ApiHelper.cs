@@ -7,10 +7,8 @@ namespace MessageBoard.Models
     {
         public static async Task<string> GetAll()
         {
-            RestClient client = new RestClient("http://localhost:5000/");
-            RestRequest request = new RestRequest($"api/users", Method.Get);
-            RestResponse response = await client.GetAsync(request);
-            return response.Content;
+            List<Users> allUsers = await Users.GetUsersAsync();
+            return allUsers.ToString();
         }
     }
 }
