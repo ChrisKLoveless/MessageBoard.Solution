@@ -30,8 +30,8 @@ namespace MessageBoard.Controllers
         [HttpPost]
         public async Task<IResult> CreateToken(AppUser user)
         {
-            List<User> userList = await _db.Users.ToListAsync();
-            bool hasUser = userList.Any(us => us.UserId == user.AppUserId);
+            List<Users> userList = await _db.Users.ToListAsync();
+            bool hasUser = userList.Any(us => us.UsersId == user.AppUserId);
             if (hasUser)
             {
                 var issuer = _config["Jwt:Issuer"];

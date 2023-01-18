@@ -1,12 +1,11 @@
-
 @{
-    ViewData["Title"] = "Users";
+  ViewData["Title"] = "Users";
 }
 <h1>All Users:</h1>
 
 <ol>
-@foreach (Users user in Model)
-{
-  <li><strong>@user.Name</strong> | <a href="/Users/Details/@(user.UsersId)">View User Details</a></li>
-}
+  @foreach (Users user in Model)
+  {
+    <li><strong>@user.Name</strong> | <a href="/Users/Details/@user.UsersId">View User Details</a></li>
+  }
 </ol>

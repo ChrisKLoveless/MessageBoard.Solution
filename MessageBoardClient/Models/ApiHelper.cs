@@ -7,7 +7,7 @@ namespace MessageBoard.Models
     {
         public static async Task<string> GetAll()
         {
-            List<Users> allUsers = await Users.GetUsersAsync();
+            List<Users> allUsers = await Users.GetAllUsersAsync();
             return allUsers.ToString();
         }
     }

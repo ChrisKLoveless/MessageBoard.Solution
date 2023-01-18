@@ -1,12 +1,11 @@
-
 @{
-    ViewData["Title"] = "Threads";
+  ViewData["Title"] = "Threads";
 }
 <h1>All Threads:</h1>
 
 <ol>
-@foreach (Threads thread in Model)
-{
-  <li><strong>@thread.Title</strong> | <a href="/Threads/Details/@(thread.ThreadsId)">View THread Details</a></li>
-}
+  @foreach (Threads thread in Model)
+  {
+    <li><strong>@thread.Title</strong> | <a href="/Threads/Details/@(thread.ThreadsId)">View Thread Details</a></li>
+  }
 </ol>

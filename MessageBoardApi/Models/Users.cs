@@ -2,13 +2,13 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MessageBoard.Models
 {
-    public class Threads
+    public class Users
     {
         [Required]
-        public string Title { get; set; }
+        public string Name { get; set; }
         [Required]
         public int UsersId { get; set; }
-        [Required]
-        public int ThreadsId { get; set; }
+
     }
+
 }

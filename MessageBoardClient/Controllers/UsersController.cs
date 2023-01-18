@@ -13,9 +13,20 @@ public class UsersController : Controller
         _logger = logger;
     }
 
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
-        List<Users> users = await Users.GetUsersAsync();
+        List<Users> users = await Users.GetAllUsersAsync();
         return View(users);
+    }
+
+    public async Task<IActionResult> Details(int id)
+    {
+        Users thisUser = await Users.GetUserAsync(id);
+        List<Threads> thisThreads = await Threads.GetAllThreadsAsync();
+        ViewBag.threads = thisThreads.Where(th => th.UsersId == id);
+        List<Post> thisPosts = await Post.GetPostsAsync();
+        ViewBag.posts = thisPosts.Where(po => po.UsersId == id);
+        return View(thisUser);
     }
 }
