@@ -1,4 +1,6 @@
-namespace MessageBoardClient.Models;
+#nullable enable
+
+namespace MessageBoard.Models;
 
 public class ErrorViewModel
 {

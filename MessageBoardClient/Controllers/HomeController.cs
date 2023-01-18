@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using MessageBoardClient.Models;
+using MessageBoard.Models;
 
-namespace MessageBoardClient.Controllers;
+namespace MessageBoard.Controllers;
 
 public class HomeController : Controller
 {
