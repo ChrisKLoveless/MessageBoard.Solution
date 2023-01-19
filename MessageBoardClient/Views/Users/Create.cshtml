@@ -1,0 +1,15 @@
+@{
+  ViewData["Title"] = "Create Animal";
+}
+
+@model MessageBoard.Models.Users
+
+<h1>Add a new user!</h1>
+
+<form action="/users/create/" method="post">
+    <input type="text" value="Name" id="Name" name="Name">
+    <input type="submit" value="Add" class="btn btn-primary"/>
+</form>
+
+<br>
+<p>@Html.ActionLink("Back to all users", "Index")</p>

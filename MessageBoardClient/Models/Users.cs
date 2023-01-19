@@ -34,5 +34,14 @@ namespace MessageBoard.Models
             Users thisUser = allUsers.FirstOrDefault(us => us.UsersId == id);
             return thisUser;
         }
+
+        public async static Task Post(Users users)
+        {
+            // string jsonUsers = JsonConvert.SerializeObject(users);
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(users);
+            ApiHelper.Post(json, $"api/users/create");
+        }
+
+
     }
 }

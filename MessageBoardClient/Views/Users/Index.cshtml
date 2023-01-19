@@ -1,7 +1,9 @@
 @{
   ViewData["Title"] = "Users";
 }
-<h1>All Users:</h1>
+<h1>All Users:</h1><br>
+
+
 
 <ol>
   @foreach (Users user in Model)
@@ -9,3 +11,6 @@
     <li><strong>@user.Name</strong> | <a href="/Users/Details/@user.UsersId">View User Details</a></li>
   }
 </ol>
+
+
+<a href="/users/create">Add a new user!</a>

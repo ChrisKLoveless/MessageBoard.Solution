@@ -1,6 +1,11 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using MessageBoard.Models;
+using RestSharp;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Web;
+using Microsoft.AspNetCore.Components.Server.ProtectedBrowserStorage;
 
 namespace MessageBoard.Controllers;
 
@@ -28,5 +33,17 @@ public class UsersController : Controller
         List<Post> thisPosts = await Post.GetPostsAsync();
         ViewBag.posts = thisPosts.Where(po => po.UsersId == id);
         return View(thisUser);
+    }
+
+    public ActionResult Create()
+    {
+        return View();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Create(Users users)
+    {
+        Users.Post(users);
+        return RedirectToAction("Index");
     }
 }
