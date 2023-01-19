@@ -1,0 +1,16 @@
+@{
+  ViewData["Title"] = $"Edit posts";
+}
+
+<h4>Edit @Model.Name's Posts</h4>
+@foreach (Post post in ViewBag.posts)
+{
+  <form action="/users/@Model.UsersId/posts/edit/@post.PostId" method="post">
+    <textarea name="Body" id="Body" cols="30" rows="3">@post.Body</textarea>
+    <br>
+    <button type="submit">Edit</button>
+    <br>
+    <br>
+  </form>
+}
+<br>

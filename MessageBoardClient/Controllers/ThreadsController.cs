@@ -23,7 +23,7 @@ public class ThreadsController : Controller
     public async Task<IActionResult> Details(int id)
     {
         Threads thisThread = await Threads.GetThreadAsync(id);
-        List<Post> thisPosts = await Post.GetPostsAsync();
+        List<Post> thisPosts = await Post.GetAllPostsAsync();
         ViewBag.posts = thisPosts.Where(po => po.ThreadsId == id);
         List<Users> users = await Users.GetAllUsersAsync();
         ViewBag.users = users;

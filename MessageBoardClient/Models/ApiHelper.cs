@@ -59,5 +59,14 @@ namespace MessageBoard.Models
       request.AddJsonBody(newPost);
       await client.PostAsync(request);
     }
+
+    public static async void PutPost(int id, string newPost)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/posts/{id}", Method.Put);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newPost);
+      await client.PutAsync(request);
+    }
   }
 }

@@ -16,7 +16,7 @@ namespace MessageBoard.Models
         [Required]
         public int PostId { get; set; }
 
-        public static async Task<List<Post>> GetPostsAsync()
+        public static async Task<List<Post>> GetAllPostsAsync()
         {
             RestClient client = new RestClient("http://localhost:5000/");
             RestRequest request = new RestRequest($"api/posts", Method.Get);
@@ -33,6 +33,12 @@ namespace MessageBoard.Models
         {
             string jsonPost = JsonConvert.SerializeObject(post);
             ApiHelper.PostPost(jsonPost);
+        }
+
+        public static void PutPost(Post post)
+        {
+            string jsonPosts = JsonConvert.SerializeObject(post);
+            ApiHelper.PutPost(post.PostId, jsonPosts);
         }
     }
 }

@@ -1,6 +1,9 @@
 @{
   ViewData["Title"] = "Users";
 }
-<h1 style="text-align: center; padding-top: 20px;">@Model.Name!</h1>
+<div style="text-align: center; padding-top: 20px;">
+  <h1>@Model.Name!</h1>
 
-<p style="text-align: center; padding-top: 20px;">@Html.ActionLink("Edit details", "Edit", new { id = @Model.UsersId })</p>
+  <p >@Html.ActionLink("Edit details", "Edit", new { id = @Model.UsersId })</p>
+  <a href="/users/@Model.UsersId/posts/edit">Edit posts</a>
+</div>

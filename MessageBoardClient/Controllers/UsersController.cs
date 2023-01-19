@@ -30,7 +30,7 @@ public class UsersController : Controller
     Users thisUser = await Users.GetUserAsync(id);
     List<Threads> thisThreads = await Threads.GetAllThreadsAsync();
     ViewBag.threads = thisThreads.Where(th => th.UsersId == id);
-    List<Post> thisPosts = await Post.GetPostsAsync();
+    List<Post> thisPosts = await Post.GetAllPostsAsync();
     ViewBag.posts = thisPosts.Where(po => po.UsersId == id);
     return View(thisUser);
   }
@@ -60,5 +60,25 @@ public class UsersController : Controller
     Users.PutUsers(users);
     Thread.Sleep(600);
     return RedirectToAction("Details", new { id = users.UsersId});
+  }
+
+  [HttpGet("/users/{id}/posts/edit")]
+  public async Task<ActionResult> EditPosts(int id)
+  {
+    List<Post> allPosts = await Post.GetAllPostsAsync();
+    List<Post> thesePosts = allPosts.Where(po => po.UsersId == id).ToList();
+    Users thisUser = await Users.GetUserAsync(id);
+    ViewBag.posts = thesePosts;
+    return View(thisUser);
+  }
+
+  [HttpPost("/users/{id}/posts/edit/{postId}")]
+  public async Task<ActionResult> EditPost(int id, int postId, string Body)
+  {
+    List<Post> allPosts = await Post.GetAllPostsAsync();
+    Post thisPost = allPosts.FirstOrDefault(po => po.PostId == postId);
+    thisPost.Body = Body;
+    Post.PutPost(thisPost);
+    return Redirect($"/users/details/{id}");
   }
 }

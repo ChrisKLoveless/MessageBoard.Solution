@@ -46,9 +46,5 @@ namespace MessageBoard.Models
       string jsonUsers = JsonConvert.SerializeObject(users);
       ApiHelper.PutUsers(users.UsersId, jsonUsers);
     }
-
-    
-
-
   }
 }
