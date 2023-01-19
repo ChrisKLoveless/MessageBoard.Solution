@@ -35,18 +35,13 @@ namespace MessageBoard.Models
       return thisUser;
     }
 
-    public static void Post(Users users)
+    public static void PostUsers(Users users)
     {
       string jsonUsers = JsonConvert.SerializeObject(users);
-      ApiHelper.Post(jsonUsers);
+      ApiHelper.PostUsers(jsonUsers);
     }
 
-    // public async static Task Post(Users users)
-    // {
-    //     // string jsonUsers = JsonConvert.SerializeObject(users);
-    //     string json = Newtonsoft.Json.JsonConvert.SerializeObject(users);
-    //     ApiHelper.Post(json, $"api/users/create");
-    // }
+    
 
 
   }

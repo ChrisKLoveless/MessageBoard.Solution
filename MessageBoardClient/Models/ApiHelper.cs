@@ -14,7 +14,7 @@ namespace MessageBoard.Models
       return allUsers.ToString();
     }
 
-    public static async void Post(string newUsers)
+    public static async void PostUsers(string newUsers)
     {
       RestClient client = new RestClient("http://localhost:5000/");
       RestRequest request = new RestRequest($"api/users", Method.Post);
@@ -23,22 +23,23 @@ namespace MessageBoard.Models
       await client.PostAsync(request);
     }
 
-    // public static async Task Post (string content, string endpoint)
-    // {
-    //     // RestClient client = new RestClient("http://localhost:5000/");
-    //     // RestRequest request = new RestRequest(endpoint, Method.Post)
-    //     //     .AddHeader("Content-Type", "application/json")
-    //     //     .AddBody(newUsers);
-    //     // await client.PostAsync(request);
-    //     var client = new HttpClient {BaseAddress = new Uri("http://localhost:5000")};
-    //     var data = new System.Net.Http.StringContent(content, Encoding.UTF8, "application/json");
-    //     var response = await client.PostAsync(endpoint, data); 
-    //     if (response.IsSuccessStatusCode)
-    //     {
-    //         Console.WriteLine(response.Content);
-    //     } else {
-    //         Console.WriteLine(JsonConvert.SerializeObject(response.Content));
-    //     }
-    // }
+    public static async void PostThreads(string newThreads)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/threads", Method.Post);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newThreads);
+      await client.PostAsync(request);
+    }
+
+
+    public static async void PostPost(string newPost)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/posts", Method.Post);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newPost);
+      await client.PostAsync(request);
+    }
   }
 }

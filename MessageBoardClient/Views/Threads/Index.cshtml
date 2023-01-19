@@ -1,7 +1,7 @@
 @{
   ViewData["Title"] = "Threads";
 }
-<h1>All Threads:</h1>
+<h1>All Threads:</h1><br>
 
 <ol>
   @foreach (Threads thread in Model)
@@ -9,3 +9,6 @@
     <li><strong>@thread.Title</strong> | <a href="/Threads/Details/@(thread.ThreadsId)">View Thread Details</a></li>
   }
 </ol>
+
+
+<a href="/threads/create">Add a new thread!</a>

@@ -35,5 +35,11 @@ namespace MessageBoard.Models
             List<Threads> allThreads = await Threads.GetAllThreadsAsync();
             return allThreads.FirstOrDefault(th => th.ThreadsId == id);
         }
+
+        public static void PostThreads(Threads threads)
+        {
+            string jsonThreads = JsonConvert.SerializeObject(threads);
+            ApiHelper.PostThreads(jsonThreads);
+        }
     }
 }

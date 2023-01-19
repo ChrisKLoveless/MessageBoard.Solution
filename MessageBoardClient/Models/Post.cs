@@ -28,5 +28,11 @@ namespace MessageBoard.Models
 
             return postList;
         }
+
+        public static void PostPost(Post post)
+        {
+            string jsonPost = JsonConvert.SerializeObject(post);
+            ApiHelper.PostPost(jsonPost);
+        }
     }
 }

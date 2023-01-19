@@ -43,14 +43,8 @@ public class UsersController : Controller
   [HttpPost]
   public ActionResult Create(Users users)
   {
-    Users.Post(users);
+    Users.PostUsers(users);
+    Thread.Sleep(600);
     return RedirectToAction("Index");
   }
-
-  // [HttpPost]
-  // public async Task<IActionResult> Create(Users users)
-  // {
-  //     Users.Post(users);
-  //     return RedirectToAction("Index");
-  // }
 }

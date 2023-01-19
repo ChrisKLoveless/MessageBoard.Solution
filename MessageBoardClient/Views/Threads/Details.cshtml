@@ -1,12 +1,36 @@
 @{
   ViewData["Title"] = "Threads";
 }
-<h1>@Model.Title</h1>
+<br><h1 style="text-align: center;">@Model.Title</h1><br>
 <hr>
 
-<h3>Posts:</h3>
+<div class="row" style="padding-top: 20px; text-align:center;" >
+<div class="col-6">
+<form action="/threads/@Model.ThreadsId/newpost/" method="post">
+<h4>Create a Post!</h4><br>
+  <input type="text" placeholder="Body" style="text-align: center;" id="Body" name="Body"><br><br>
+  <select name="usersId" id="usersId">
+    @foreach (Users user in ViewBag.users)
+    {
+      <option value="@user.UsersId">
+        @user.Name
+      </option>
+    }
+  </select>
+  <br><br><button type="submit">Post</button>
+</form>
+</div>
+<div class="col-6">
+<h3>Posts:</h3><br>
 @foreach (Post post in ViewBag.posts)
 {
-  <p>@post.Body</p>
-  <br>
+  @foreach (Users postUser in ViewBag.users)
+  {
+    @if (postUser.UsersId == post.UsersId)
+    {
+      <p><strong>@postUser.Name</strong>: @post.Body</p>
+    }
+  }
 }
+</div>
+</div>
