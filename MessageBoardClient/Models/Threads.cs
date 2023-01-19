@@ -41,5 +41,11 @@ namespace MessageBoard.Models
             string jsonThreads = JsonConvert.SerializeObject(threads);
             ApiHelper.PostThreads(jsonThreads);
         }
+
+        public static void PutThreads(Threads threads)
+        {
+            string jsonThreads = JsonConvert.SerializeObject(threads);
+            ApiHelper.PutThreads(threads.ThreadsId, jsonThreads);
+        }
     }
 }

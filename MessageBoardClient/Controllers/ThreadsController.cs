@@ -54,4 +54,18 @@ public class ThreadsController : Controller
         Thread.Sleep(600);
         return Redirect($"/threads/details/{id}");
     }
+
+    public async Task<ActionResult> Edit(int id)
+    {
+        Threads threads = await Threads.GetThreadAsync(id);
+        return View(threads);
+    }
+
+    [HttpPost]
+    public ActionResult Edit(Threads threads)
+    {
+        Threads.PutThreads(threads);
+        Thread.Sleep(600);
+        return RedirectToAction("Details", new { id = threads.ThreadsId });
+    }
 }

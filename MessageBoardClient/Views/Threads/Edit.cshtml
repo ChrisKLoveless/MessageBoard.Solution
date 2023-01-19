@@ -1,0 +1,16 @@
+@{
+  ViewData["Title"] = $"Edit {Model.Title}";
+}
+
+@model MessageBoard.Models.Threads
+<h4>Edit Thread!</h4>
+@using (Html.BeginForm())
+{
+  @Html.HiddenFor(model => model.ThreadsId)
+  @Html.TextBoxFor(model => model.Title, new { @Value = Model.Title, style = "text-align: center;"})
+  <br>
+  <br><input type="submit" value="Edit" class="btn btn-primary"/>
+}
+
+<br>
+<p>@Html.ActionLink("Back to details", "Details", new {id = @Model.ThreadsId})</p>

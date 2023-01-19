@@ -47,4 +47,18 @@ public class UsersController : Controller
     Thread.Sleep(600);
     return RedirectToAction("Index");
   }
+
+  public async Task<ActionResult> Edit(int id)
+  {
+    Users users = await Users.GetUserAsync(id);
+    return View(users);
+  }
+
+  [HttpPost]
+  public ActionResult Edit(Users users)
+  {
+    Users.PutUsers(users);
+    Thread.Sleep(600);
+    return RedirectToAction("Details", new { id = users.UsersId});
+  }
 }

@@ -23,6 +23,15 @@ namespace MessageBoard.Models
       await client.PostAsync(request);
     }
 
+    public static async void PutUsers(int id, string newUser)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/users/{id}", Method.Put);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newUser);
+      await client.PutAsync(request);
+    }
+
     public static async void PostThreads(string newThreads)
     {
       RestClient client = new RestClient("http://localhost:5000/");
@@ -30,6 +39,15 @@ namespace MessageBoard.Models
       request.AddHeader("Content-Type", "application/json");
       request.AddJsonBody(newThreads);
       await client.PostAsync(request);
+    }
+
+    public static async void PutThreads(int id, string newThreads)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/threads/{id}", Method.Put);
+      request.AddHeader("Content-Type", "application/json");
+      request.AddJsonBody(newThreads);
+      await client.PutAsync(request);
     }
 
 
