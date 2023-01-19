@@ -7,41 +7,47 @@ using RestSharp;
 
 namespace MessageBoard.Models
 {
-    public class Users
+  public class Users
+  {
+    [Required]
+    public string Name { get; set; }
+    [Required]
+    public int UsersId { get; set; }
+
+
+    public static async Task<List<Users>> GetAllUsersAsync()
     {
-        [Required]
-        public string Name { get; set; }
-        [Required]
-        public int UsersId { get; set; }
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/users", Method.Get);
+      RestResponse response = await client.GetAsync(request);
+      var result = response.Content;
 
+      JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
+      List<Users> usersList = JsonConvert.DeserializeObject<List<Users>>(jsonResponse.ToString());
 
-        public static async Task<List<Users>> GetAllUsersAsync()
-        {
-            RestClient client = new RestClient("http://localhost:5000/");
-            RestRequest request = new RestRequest($"api/users", Method.Get);
-            RestResponse response = await client.GetAsync(request);
-            var result = response.Content;
-
-            JArray jsonResponse = JsonConvert.DeserializeObject<JArray>(result);
-            List<Users> usersList = JsonConvert.DeserializeObject<List<Users>>(jsonResponse.ToString());
-
-            return usersList;
-        }
-
-        public static async Task<Users> GetUserAsync(int id)
-        {
-            List<Users> allUsers = await Users.GetAllUsersAsync();
-            Users thisUser = allUsers.FirstOrDefault(us => us.UsersId == id);
-            return thisUser;
-        }
-
-        public async static Task Post(Users users)
-        {
-            // string jsonUsers = JsonConvert.SerializeObject(users);
-            string json = Newtonsoft.Json.JsonConvert.SerializeObject(users);
-            ApiHelper.Post(json, $"api/users/create");
-        }
-
-
+      return usersList;
     }
+
+    public static async Task<Users> GetUserAsync(int id)
+    {
+      List<Users> allUsers = await Users.GetAllUsersAsync();
+      Users thisUser = allUsers.FirstOrDefault(us => us.UsersId == id);
+      return thisUser;
+    }
+
+    public static void Post(Users users)
+    {
+      string jsonUsers = JsonConvert.SerializeObject(users);
+      ApiHelper.Post(jsonUsers);
+    }
+
+    // public async static Task Post(Users users)
+    // {
+    //     // string jsonUsers = JsonConvert.SerializeObject(users);
+    //     string json = Newtonsoft.Json.JsonConvert.SerializeObject(users);
+    //     ApiHelper.Post(json, $"api/users/create");
+    // }
+
+
+  }
 }

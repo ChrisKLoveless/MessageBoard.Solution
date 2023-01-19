@@ -1,15 +1,16 @@
 @{
-  ViewData["Title"] = "Create Animal";
+  ViewData["Title"] = "Create User";
 }
 
 @model MessageBoard.Models.Users
 
 <h1>Add a new user!</h1>
 
-<form action="/users/create/" method="post">
-    <input type="text" value="Name" id="Name" name="Name">
-    <input type="submit" value="Add" class="btn btn-primary"/>
-</form>
+@using (Html.BeginForm())
+{
+  @Html.TextBoxFor(model => model.Name, new { placeholder = "Name", style = "text-align: center;"})
+  <input type="submit" value="Add!" class="btn btn-primary"/>
+}
 
 <br>
-<p>@Html.ActionLink("Back to all users", "Index")</p>
+<p>@Html.ActionLink("Back to all users!", "Index")</p>
