@@ -3,12 +3,17 @@
 }
 <h1>All Threads:</h1><br>
 
-<ol>
+<ul>
   @foreach (Threads thread in Model)
   {
-    <li><strong>@thread.Title</strong> | <a href="/Threads/Details/@(thread.ThreadsId)">View Thread Details</a></li>
+    @foreach (Users user in ViewBag.users)
+  {
+    @if(thread.UsersId == user.UsersId) {
+    <li><strong>@user.Name</strong> | <a href="/Threads/Details/@(thread.ThreadsId)"><strong>@thread.Title</strong></a></li>
+    }
   }
-</ol>
+  }
+</ul>
 
 
 <a href="/threads/create">Add a new thread!</a>

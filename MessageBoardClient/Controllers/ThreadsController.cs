@@ -17,6 +17,8 @@ public class ThreadsController : Controller
     public async Task<IActionResult> Index()
     {
         List<Threads> threads = await Threads.GetAllThreadsAsync();
+        List<Users> users = await Users.GetAllUsersAsync();
+        ViewBag.users = users;
         return View(threads);
     }
 
@@ -30,8 +32,10 @@ public class ThreadsController : Controller
         return View(thisThread);
     }
 
-    public ActionResult Create()
+    public async Task<ActionResult> Create()
     {
+        List<Users> users = await Users.GetAllUsersAsync();
+        ViewBag.users = users;
         return View();
     }
 
@@ -67,5 +71,14 @@ public class ThreadsController : Controller
         Threads.PutThreads(threads);
         Thread.Sleep(600);
         return RedirectToAction("Details", new { id = threads.ThreadsId });
+    }
+
+    [HttpPost("/threads/{id}/delete")]
+    public async Task<ActionResult> DeletePost(int id)
+    {
+        Threads thisTHreads = await Threads.GetThreadAsync(id);
+        Threads.DeleteThreads(thisTHreads);
+        Thread.Sleep(600);
+        return Redirect($"/threads");
     }
 }

@@ -14,3 +14,6 @@
 
 <br>
 <p>@Html.ActionLink("Back to details", "Details", new {id = @Model.ThreadsId})</p>
+<form action="/threads/@Model.ThreadsId/delete" method="post">
+  <button type="submit">delete</button>
+</form>

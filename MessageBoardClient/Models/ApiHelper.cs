@@ -50,6 +50,20 @@ namespace MessageBoard.Models
       await client.PutAsync(request);
     }
 
+    public static async void DeleteThread(int id, List<Post> posts)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      foreach (Post post in posts)
+      {
+        RestRequest deletePostRequest = new RestRequest($"api/posts/{id}", Method.Delete);
+        deletePostRequest.AddHeader("Content-Type", "application/json");
+        await client.DeleteAsync(deletePostRequest);
+      }
+      RestRequest request = new RestRequest($"api/threads/{id}", Method.Delete);
+      request.AddHeader("Content-Type", "application/json");
+      await client.DeleteAsync(request);
+    }
+
 
     public static async void PostPost(string newPost)
     {
@@ -67,6 +81,14 @@ namespace MessageBoard.Models
       request.AddHeader("Content-Type", "application/json");
       request.AddJsonBody(newPost);
       await client.PutAsync(request);
+    }
+
+    public static async void DeletePost(int id)
+    {
+      RestClient client = new RestClient("http://localhost:5000/");
+      RestRequest request = new RestRequest($"api/posts/{id}", Method.Delete);
+      request.AddHeader("Content-Type", "application/json");
+      await client.DeleteAsync(request);
     }
   }
 }

@@ -46,5 +46,12 @@ namespace MessageBoard.Models
             string jsonThreads = JsonConvert.SerializeObject(threads);
             ApiHelper.PutThreads(threads.ThreadsId, jsonThreads);
         }
+
+        public static async void DeleteThreads(Threads threads)
+        {
+            List<Post> allPosts = await Post.GetAllPostsAsync();
+            List<Post> thesePosts = allPosts.Where(po => po.ThreadsId == threads.ThreadsId).ToList();
+            ApiHelper.DeleteThread(threads.ThreadsId, thesePosts);
+        }
     }
 }

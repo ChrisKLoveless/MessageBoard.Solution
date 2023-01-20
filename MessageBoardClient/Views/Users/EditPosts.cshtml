@@ -9,8 +9,11 @@
     <textarea name="Body" id="Body" cols="30" rows="3">@post.Body</textarea>
     <br>
     <button type="submit">Edit</button>
-    <br>
-    <br>
+  </form>  
+  <form action="/users/@Model.UsersId/posts/delete/@post.PostId" method="post">
+    <button type="submit">Delete</button>
   </form>
+  <br>
+  <br>
 }
 <br>

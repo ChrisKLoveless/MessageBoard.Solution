@@ -4,13 +4,25 @@
 
 @model MessageBoard.Models.Threads
 
-<h1>Add a new thread!</h1><br>
 
-@using (Html.BeginForm())
-{
-  @Html.TextBoxFor(model => model.Title, new { placeholder = "Title", style = "text-align: center;"})<br><br>
-  <input type="submit" value="Add!" class="btn btn-primary"/>
-}
-
-<br>
-<p>@Html.ActionLink("Back to all threads!", "Index")</p>
+<div style = "text-align: center;">
+  <h1>Add a new thread!</h1><br>
+  <form action="/threads/create" method="post">
+    <select name="UsersId" id="UsersId">
+      @foreach (Users user in ViewBag.users)
+      {
+        <option value="@user.UsersId">
+          @user.Name
+        </option>
+      }
+    </select>
+    <br>
+    <br>
+    <textarea name="Title" id="Title" cols="30" rows="3" placeholder="Title"></textarea>
+    <br>
+    <br>
+    <input type="submit" value="Add!" class="btn btn-primary"/>
+  </form>
+  <br>
+  <p>@Html.ActionLink("Back to all threads!", "Index")</p>
+</div>

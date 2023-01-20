@@ -32,6 +32,7 @@ public class UsersController : Controller
     ViewBag.threads = thisThreads.Where(th => th.UsersId == id);
     List<Post> thisPosts = await Post.GetAllPostsAsync();
     ViewBag.posts = thisPosts.Where(po => po.UsersId == id);
+    
     return View(thisUser);
   }
 
@@ -79,6 +80,15 @@ public class UsersController : Controller
     Post thisPost = allPosts.FirstOrDefault(po => po.PostId == postId);
     thisPost.Body = Body;
     Post.PutPost(thisPost);
+    return Redirect($"/users/details/{id}");
+  }
+
+  [HttpPost("/users/{id}/posts/delete/{postId}")]
+  public async Task<ActionResult> DeletePost(int id, int postId)
+  {
+    List<Post> allPosts = await Post.GetAllPostsAsync();
+    Post thisPost = allPosts.FirstOrDefault(po => po.PostId == postId);
+    Post.DeletePost(thisPost);
     return Redirect($"/users/details/{id}");
   }
 }

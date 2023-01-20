@@ -40,5 +40,10 @@ namespace MessageBoard.Models
             string jsonPosts = JsonConvert.SerializeObject(post);
             ApiHelper.PutPost(post.PostId, jsonPosts);
         }
+
+        public static void DeletePost(Post post)
+        {
+            ApiHelper.DeletePost(post.PostId);
+        }
     }
 }
